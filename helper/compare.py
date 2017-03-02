@@ -13,6 +13,6 @@ if __name__ == '__main__':
 
     a = tifffile.imread(args.input)
     r = tifffile.imread(args.reference)
-    diff = np.sum(np.abs(a - r))
-    print(diff)
-    sys.exit(0 if diff == 0.0 else 1)
+    rmse = np.sqrt(np.sum((a - r)**2) / (a.shape[0] * a.shape[1]))
+    print(rmse)
+    sys.exit(0 if rmse <= args.epsilon else 1)
