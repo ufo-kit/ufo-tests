@@ -21,5 +21,5 @@ rmse=$(python helper/compare.py --input $output --reference $ref --epsilon $epsi
 if [[ $? != 0 ]]; then
     echo "$(tput setaf 1)FAIL$(tput sgr0)  $name (RMSE = $rmse)"
 else
-    echo "$(tput setaf 2)PASS$(tput sgr0)  $name"
+    echo "$(tput setaf 2)PASS$(tput sgr0)  $name (RMSE = $rmse)"
 fi
