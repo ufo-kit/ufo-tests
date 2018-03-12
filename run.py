@@ -8,6 +8,7 @@ import subprocess
 import shlex
 import tifffile
 import numpy as np
+import colorama
 from colorama import Fore as FG, Back as BG, Style as ST
 
 
@@ -70,5 +71,7 @@ def run_all(test):
 
 
 if __name__ == '__main__':
+    colorama.init()
+
     for test in json.load(open('tests.json')):
         run_all(test)
