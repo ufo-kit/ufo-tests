@@ -49,20 +49,14 @@ def run_all(test):
         fixed = dict(zip(params.keys(), elem))
         keys = sorted(fixed.keys())
 
-        if keys:
-            param_name = '-' + '-'.join(('{}_{}'.format(k, fixed[k]) for k in keys))
-        else:
-            param_name = ''
-
+        param_name = '-' + '-'.join(('{}_{}'.format(k, fixed[k]) for k in keys)) if keys else ''
         reference = 'reference/{}{}-ref.tif'.format(test['name'], param_name)
+
         a = tifffile.imread(output)
         r = tifffile.imread(reference)
         rmse = np.sqrt(np.sum((a - r)**2) / (a.shape[0] * a.shape[1]))
 
-        if keys:
-            p = ' '.join(('{}={}'.format(k, fixed[k]) for k in keys)) + ' '
-        else:
-            p = ''
+        p = ' '.join(('{}={}'.format(k, fixed[k]) for k in keys)) + ' ' if keys else ''
 
         if epsilon is not None:
             s = '{} ({}RMSE_is={:3.5f} RMS_exp={})'.format(test['name'], p, rmse, epsilon)
