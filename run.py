@@ -43,15 +43,16 @@ def run_all(test):
     for elem, epsilon in zip(itertools.product(*params.values()), test['epsilon']):
         fixed = dict(zip(params.keys(), elem))
 
-        fixed['output'] = output
-        cmd = template.substitute(**fixed)
-        proc = monitor_process(shlex.split(cmd))
-
         fixed = dict(zip(params.keys(), elem))
         keys = sorted(fixed.keys())
-
         param_name = '-' + '-'.join(('{}_{}'.format(k, fixed[k]) for k in keys)) if keys else ''
         reference = 'reference/{}{}-ref.tif'.format(test['name'], param_name)
+
+        fixed['output'] = output
+        fixed['reference'] = reference
+
+        cmd = template.substitute(**fixed)
+        proc = monitor_process(shlex.split(cmd))
 
         a = tifffile.imread(output)
         r = tifffile.imread(reference)
