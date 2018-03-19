@@ -30,5 +30,15 @@
         "params": {},
         "command" : "ufo-launch read path=data/test-stripe-removal-input.tif ! fft dimensions=2 ! filter-stripes ! ifft dimensions=2 ! crop height=3000 width=825 ! write filename=${output}",
         "epsilon": [0.07]
+    },
+    {
+        "name": "transpose",
+        "params": {
+            "width": [1, 7, 128, 145],
+            "height": [1, 7, 128, 145]
+        },
+        "command" : "python test-transpose.py ${reference} ${output} ${width} ${height}",
+        "epsilon": [null, null, null, null, null, null, null, null, null, null, null, null,
+                    null, null, null, null]
     }
 ]

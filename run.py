@@ -29,7 +29,7 @@ def monitor_process(cmd):
         pass
 
     for line in lines(proc.stderr):
-        print(colorama.FG.RED + ST.BRIGHT + line + ST.RESET_ALL)
+        print(FG.RED + ST.BRIGHT + line + ST.RESET_ALL)
 
     proc.wait()
     return proc
