@@ -54,6 +54,10 @@ def run_all(test):
         cmd = template.substitute(**fixed)
         proc = monitor_process(shlex.split(cmd))
 
+        if proc.returncode:
+            print(FG.RED + ST.BRIGHT + 'FAIL  ' + ST.RESET_ALL + test['name'])
+            continue
+
         a = tifffile.imread(output)
         r = tifffile.imread(reference)
         rmse = np.sqrt(np.sum((a - r)**2) / (a.shape[0] * a.shape[1]))
