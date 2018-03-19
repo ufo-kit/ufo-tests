@@ -41,8 +41,12 @@ def main():
     width = int(width)
     height = int(height)
 
-    transpose_numpy(width, height, path_numpy)
-    transpose_ufo(width, height, path_ufo)
+    try:
+        transpose_numpy(width, height, path_numpy)
+        transpose_ufo(width, height, path_ufo)
+    except Exception as e:
+        sys.stderr.write(str(e))
+        sys.exit(1)
 
 
 if __name__ == '__main__':
