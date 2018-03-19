@@ -39,10 +39,10 @@ def run_all(test):
     output = '/tmp/test.tif'
     params = test['params']
     template = string.Template(test['command'])
+    elements = list(itertools.product(*params.values()))
+    epsilons = test['epsilon'] or [None]*len(elements)
 
-    for elem, epsilon in zip(itertools.product(*params.values()), test['epsilon']):
-        fixed = dict(zip(params.keys(), elem))
-
+    for elem, epsilon in zip(elements, epsilons):
         fixed = dict(zip(params.keys(), elem))
         keys = sorted(fixed.keys())
         param_name = '-' + '-'.join(('{}_{}'.format(k, fixed[k]) for k in keys)) if keys else ''
