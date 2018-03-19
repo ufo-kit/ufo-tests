@@ -1,6 +1,8 @@
 import sys
 import numpy as np
 import tifffile
+import gi
+gi.require_version('Ufo', '0.0')
 from gi.repository import Ufo
 
 
