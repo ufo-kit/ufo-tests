@@ -41,6 +41,8 @@ def run_all(test):
     template = string.Template(test['command'])
     elements = list(itertools.product(*params.values()))
     epsilons = test['epsilon'] or [None]*len(elements)
+    if len(epsilons) == 1:
+        epsilons *= len(elements)
 
     for elem, epsilon in zip(elements, epsilons):
         fixed = dict(zip(params.keys(), elem))
