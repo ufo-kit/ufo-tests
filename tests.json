@@ -1,5 +1,11 @@
 [
     {
+        "name": "fbp",
+        "params": {},
+        "command": "ufo-launch read path=data/shepp-logan-sinogram.tif ! fft ! filter ! ifft ! backproject ! write filename=${output}",
+        "epsilon": [1.0]
+    },
+    {
         "name": "fft-roundtrip",
         "params": {
             "dim": [1, 2]
