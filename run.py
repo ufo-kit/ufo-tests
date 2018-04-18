@@ -65,7 +65,7 @@ def run_all(test):
         p = ' '.join(('{}={}'.format(k, fixed[k]) for k in keys)) + ' ' if keys else ''
 
         if epsilon is not None:
-            s = '{} ({}RMSE_is={:3.5f} RMS_exp={})'.format(test['name'], p, rmse, epsilon)
+            s = '{} ({}RMSE_is={:3.5f} RMS_exp<{})'.format(test['name'], p, rmse, epsilon)
         else:
             s = '{} ({}RMSE_is={:3.5f})'.format(test['name'], p, rmse)
 
