@@ -6,6 +6,12 @@
         "epsilon": [1.0]
     },
     {
+        "name": "no-rescale",
+        "command": "ufo-launch read path=data/small-range.tif ! write filename=${output} rescale=false bits=8",
+        "params": {},
+        "epsilon": null
+    },
+    {
         "name": "fft-roundtrip",
         "params": {
             "dim": [1, 2]
