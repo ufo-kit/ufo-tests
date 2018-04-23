@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import json
 import itertools
 import string
@@ -78,5 +79,17 @@ def run_all(test):
 if __name__ == '__main__':
     colorama.init()
 
-    for test in json.load(open('tests.json')):
-        run_all(test)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-t', '--test', default=None, help="Single test to run")
+    args = parser.parse_args()
+
+    tests = json.load(open('tests.json'))
+
+    if args.test:
+        try:
+            run_all(next(x for x in tests if x['name'] == args.test))
+        except StopIteration:
+            print("Error: test `{}' not found.".format(args.test))
+    else:
+        for test in tests:
+            run_all(test)
