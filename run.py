@@ -42,6 +42,8 @@ def run_all(test):
     template = string.Template(test['command'])
     elements = list(itertools.product(*params.values()))
     epsilons = test['epsilon'] or [None]*len(elements)
+    if len(epsilons) == 1:
+        epsilons *= len(elements)
 
     for elem, epsilon in zip(elements, epsilons):
         fixed = dict(zip(params.keys(), elem))
@@ -61,7 +63,11 @@ def run_all(test):
 
         a = tifffile.imread(output)
         r = tifffile.imread(reference)
-        rmse = np.sqrt(np.sum((a - r)**2) / (a.shape[0] * a.shape[1]))
+        rmse = np.sqrt(np.mean((a - r) ** 2))
+        if np.abs(r.mean()) > 10:
+            # Take into account shift from zero, thus make the rmse work with data which has large
+            # absolute scale.
+            rmse /= r.mean()
 
         p = ' '.join(('{}={}'.format(k, fixed[k]) for k in keys)) + ' ' if keys else ''
 

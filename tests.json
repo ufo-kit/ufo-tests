@@ -51,5 +51,16 @@
         },
         "command" : "python test-transpose.py ${reference} ${output} ${width} ${height}",
         "epsilon": null
+    },
+    {
+        "name": "measure",
+        "params": {
+            "metric": ["min", "max", "sum", "mean", "var", "std", "skew", "kurtosis"],
+            "axis": [-1, 0, 1],
+            "width": [1, 7, 597],
+            "height": [1, 7, 597]
+        },
+        "command" : "python test-measure.py ${reference} ${output} ${metric} ${axis} ${width} ${height}",
+        "epsilon": [1e-3]
     }
 ]
