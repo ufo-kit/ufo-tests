@@ -62,5 +62,11 @@
         },
         "command" : "python test-measure.py ${reference} ${output} ${metric} ${axis} ${width} ${height}",
         "epsilon": [1e-3]
+    },
+    {
+        "name": "opencl-pass-options",
+        "params": {},
+        "command" : "bash test-opencl-pass-options.sh ${output}",
+        "epsilon": null
     }
 ]
